@@ -1,0 +1,581 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    
+    <edmx:Reference Uri="/odata/v2/ZGBLMTORDER_SRV/$metadata">
+        <edmx:Include Alias="Metadata" Namespace="ZGBLMTORDER_SRV"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="local">
+            <Annotations Target="Metadata.EntityContainer/ENTITY001Set">
+                <Annotation Term="Org.OData.Capabilities.V1.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Path="deleteFlag" />
+                    </Record>
+                </Annotation>
+                <Annotation Term="Org.OData.Capabilities.V1.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Path="deleteFlag"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="Metadata.EntityContainer/ENTITY002Set">
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record Type="Capabilities.UpdateRestrictionsType">
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="Metadata.EntityContainer/ENTITY003Set">
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record Type="Capabilities.UpdateRestrictionsType">
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="Metadata.EntityContainer/ENTITY004Set">
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record Type="Capabilities.UpdateRestrictionsType">
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>                        
+            <Annotations Target="Metadata.ENTITY001Set/productID">
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="ENTITY002Set"/>
+                        <PropertyValue Property="Label" String="{@i18n>product}"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                            <Record Type="Common.ValueListParameterOut">	
+                                <PropertyValue Property="ValueListProperty" String="productID"/>
+                                <PropertyValue Property="LocalDataProperty" PropertyPath="productID"/>
+                            </Record> 
+                            <Record Type="Common.ValueListParameterDisplayOnly"  >
+                                <PropertyValue Property="ValueListProperty" String="productName" />
+                            </Record>
+                            <Record Type="Common.ValueListParameterDisplayOnly">
+                                <PropertyValue Property="ValueListProperty" String="productCategory"/>
+                            </Record>                            
+                            </Collection>
+                        </PropertyValue>
+                        <!-- <PropertyValue Property="PresentationVariantQualifier" String="Product Name"/>   -->
+                    </Record>	
+                </Annotation>	
+            </Annotations> 
+            <Annotations Target="Metadata.ENTITY001Set/customerNo">
+                <Annotation Term="Common.ValueList">
+                    <Record >
+                        <PropertyValue Property="CollectionPath" String="ENTITY003Set"/>
+                        <PropertyValue Property="Label" String="{@i18n>customer}"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                            <Record Type="Common.ValueListParameterInOut">
+                                <PropertyValue Property="ValueListProperty" String="customerNo"/>
+                                <PropertyValue Property="LocalDataProperty" PropertyPath="customerNo"/>
+                            </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>	
+                </Annotation>	
+            </Annotations>
+            <Annotations Target="ZGBLMTORDER_SRV.ENTITY005Set">
+                <!-- Items Table list in Items tab of Object Page Detail Part -->
+				<Annotation Term="UI.LineItem" Qualifier="history">
+					<Collection>			
+                        <Record Type="UI.DataField">							
+                            <PropertyValue Property="Value" Path="orderNo"/>	
+                            <PropertyValue Property="Label" String="{@i18n>orderNopo}"/>	
+                        </Record>							
+                        <Record Type="UI.DataField">							
+                            <PropertyValue Property="Value" Path="itemNo"/>	
+                            <PropertyValue Property="Label" String="{@i18n>itemNopo}"/>					
+                        </Record>							
+                        <Record Type="UI.DataField">							
+                            <PropertyValue Property="Value" Path="status"/>	
+                            <PropertyValue Property="Label" String="{@i18n>status}"/>					
+                        </Record>							
+                        <Record Type="UI.DataField">							
+                            <PropertyValue Property="Value" Path="changeDate"/>	
+                            <PropertyValue Property="Label" String="{@i18n>dateOfLastChange}"/>						
+                        </Record>							
+                        <Record Type="UI.DataField">							
+                            <PropertyValue Property="Value" Path="changeBy"/>	
+                            <PropertyValue Property="Label" String="{@i18n>lastChangedAt}"/>					
+                        </Record>							
+                    </Collection>
+				</Annotation>		
+            </Annotations>               
+            <Annotations Target="Metadata.ENTITY001Set/repPersonNo">
+                <Annotation Term="Common.ValueList">
+                    <Record >
+                        <PropertyValue Property="CollectionPath" String="ENTITY004Set"/>
+                        <PropertyValue Property="Label" String="{@i18n>repairPerson}"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                            <Record Type="Common.ValueListParameterInOut">
+                                <PropertyValue Property="ValueListProperty" String="repPersonNo"/>
+                                <PropertyValue Property="LocalDataProperty" PropertyPath="repPersonNo"/>
+                            </Record>
+                            <!-- <Record Type="Common.ValueListParameterDisplayOnly">
+                                <PropertyValue Property="ValueListProperty" String="repPersonNo"/>
+                            </Record> -->
+                            </Collection>
+                        </PropertyValue>
+                    </Record>	
+                </Annotation>	
+            </Annotations> 
+            <Annotations Target="Metadata.ENTITY001Set">
+                <!-- <Annotation Term="UI.Identification">
+                    <Collection>
+                            <Record Type="UI.DataFieldForAction">
+                                <PropertyValue Property="Label" String="{@i18n>close}" />
+                                <PropertyValue Property="Action"
+                                        String="" />
+                                <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High" />
+                            </Record>
+                    </Collection>
+                </Annotation> -->
+                <Annotation Term="UI.SelectionFields">									
+                    <Collection>								
+                        <PropertyPath>orderNo</PropertyPath>							
+                        <PropertyPath>statusNo</PropertyPath>	
+                        <PropertyPath>productID</PropertyPath>							
+                    </Collection>								
+                </Annotation>									
+                <Annotation Term="UI.LineItem">									
+                    <Collection>								
+                        <Record Type="UI.DataField">							
+                            <PropertyValue Property="Value" Path="orderNo"/>	
+                            <PropertyValue Property="Label" String="{@i18n>orderNumber}"/>	
+                        </Record>							
+                        <Record Type="UI.DataField">							
+                            <PropertyValue Property="Value" Path="statusNo"/>	
+                            <PropertyValue Property="Label" String="{@i18n>status}"/>					
+                        </Record>							
+                        <Record Type="UI.DataField">							
+                            <PropertyValue Property="Value" Path="customerNo"/>	
+                            <PropertyValue Property="Label" String="{@i18n>customer}"/>					
+                        </Record>							
+                        <Record Type="UI.DataField">							
+                            <PropertyValue Property="Value" Path="productID"/>	
+                            <PropertyValue Property="Label" String="{@i18n>product}"/>						
+                        </Record>							
+                        <Record Type="UI.DataField">							
+                            <PropertyValue Property="Value" Path="repPersonNo"/>	
+                            <PropertyValue Property="Label" String="{@i18n>repairPerson}"/>					
+                        </Record>							
+                    </Collection>								
+                </Annotation>
+                <!-- Items Table list in Items tab of Object Page Detail Part -->
+				<Annotation Term="UI.LineItem" Qualifier="history">
+					<Collection>			
+                        <Record Type="UI.DataField">							
+                            <PropertyValue Property="Value" Path="foregin1/orderNo"/>	
+                            <PropertyValue Property="Label" String="{@i18n>orderNopo}"/>	
+                        </Record>							
+                        <Record Type="UI.DataField">							
+                            <PropertyValue Property="Value" Path="foregin1/itemNo"/>	
+                            <PropertyValue Property="Label" String="{@i18n>itemNopo}"/>					
+                        </Record>							
+                        <Record Type="UI.DataField">							
+                            <PropertyValue Property="Value" Path="foregin1/status"/>	
+                            <PropertyValue Property="Label" String="{@i18n>status}"/>					
+                        </Record>							
+                        <Record Type="UI.DataField">							
+                            <PropertyValue Property="Value" Path="foregin1/changeDate"/>	
+                            <PropertyValue Property="Label" String="{@i18n>dateOfLastChange}"/>						
+                        </Record>							
+                        <Record Type="UI.DataField">							
+                            <PropertyValue Property="Value" Path="foregin1/changeBy"/>	
+                            <PropertyValue Property="Label" String="{@i18n>lastChangedAt}"/>					
+                        </Record>							
+                    </Collection>
+				</Annotation>		
+                <!-- Page Header in Object Page -->								
+                <Annotation Term="UI.HeaderInfo">									
+                    <Record Type="UI.HeaderInfoType">								
+                        <PropertyValue Property="TypeName" String="{@i18n>orderdetail}"/>							
+                        <PropertyValue Property="TypeNamePlural" String="{@i18n>orders}"/>							
+                        <PropertyValue Property="Title">							
+                            <Record Type="UI.DataField">						
+                                <PropertyValue Property="Value" Path="orderNo">
+									<Apply Function="odata.concat">
+										<String>Maintenance Order:</String>
+										<Path>orderNo</Path>
+									</Apply>
+								</PropertyValue>					
+                            </Record>						
+                        </PropertyValue>							
+                        <PropertyValue Property="Description">							
+                            <Record Type="UI.DataField">						
+                                <PropertyValue Property="Value" Path="dateFrom"/>					
+                            </Record>						
+                        </PropertyValue>
+                        <PropertyValue Property="ImageUrl" Path="foregin2/imageURL" />							
+                    </Record>								
+                </Annotation>	         
+
+                <!-- Header Content in Object Page -->      
+				<Annotation Term="UI.HeaderFacets">
+					<Collection>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#MT" />
+							<PropertyValue Property="Label" String="" />
+						</Record>
+						<!-- <Record Type="UI.ReferenceFacet"> -->
+						<!-- <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Product"&nbsp;
+							/> -->
+						<!-- <PropertyValue Property="Label" String="" /> -->
+						<!-- </Record> -->
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#Status" />
+							<PropertyValue Property="Label" String="{@i18n>status}" />
+						</Record>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#Rating" />
+							<PropertyValue Property="Label" String="{@i18n>rating}" />
+						</Record>
+					</Collection>
+				</Annotation>
+                <Annotation Term="UI.DataPoint" Qualifier="Status">
+					<Record Type="UI.DataPointType">
+						<PropertyValue Property="Title" String="{@i18n>status}" />
+						<PropertyValue Property="Value" Path="statusNo">
+						</PropertyValue>
+					</Record>
+                </Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="Rating">
+					<Record Type="UI.DataPointType">
+						<PropertyValue Property="Title" String="{@i18n>rating}" />
+						<PropertyValue Property="Value" Path="feedBack" />
+						<PropertyValue Property="TargetValue" Int="5" />
+						<!-- <PropertyValue Property="SampleSize" Path="RatingStatus"></PropertyValue> -->
+						<PropertyValue Property="Visualization"
+							EnumMember="UI.VisualizationType/Rating" />
+					</Record>
+                </Annotation>    
+				<Annotation Term="UI.FieldGroup" Qualifier="MT">
+					<Record Type="UI.FieldGroupType">
+						<PropertyValue Property="Data">
+							<Collection>
+
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value" Path="foregin2/productCategory" />
+									<PropertyValue Property="Label" String="{@i18n>category}" />
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value" Path="foregin2/productName" />
+									<PropertyValue Property="Label" String="{@i18n>label_productname}" />
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value" Path="productID" />
+									<PropertyValue Property="Label" String="{@i18n>productid}" />
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value" Path="orderNo" />
+									<PropertyValue Property="Label" String="{@i18n>orderno}" />
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value" Path="dateFrom" />
+									<PropertyValue Property="Label" String="{@i18n>datefrom}" />
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+                </Annotation> 
+                
+                <!-- Navigation Content in Object Page Detail Part -->							
+                <Annotation Term="UI.Facets">									
+                    <Collection>
+                        <Record Type="UI.CollectionFacet">
+							<PropertyValue Property="Label" String="{@i18n>productInformation}" />
+							<PropertyValue Property="ID" String="Product" />                            
+							<PropertyValue Property="Facets">
+								<Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Target"
+                                            AnnotationPath="@UI.FieldGroup#ProductHomepage" />
+                                        <PropertyValue Property="Label" String="" />    
+                                    </Record>
+  
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Target"
+                                            AnnotationPath="@UI.FieldGroup#PartsInformation" />
+                                        <PropertyValue Property="Label" String="" />    
+                                    </Record>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Target"
+                                            AnnotationPath="@UI.FieldGroup#TechnicalInformation" />
+                                        <PropertyValue Property="Label" String="" />    
+                                    </Record>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Target"
+                                            AnnotationPath="@UI.FieldGroup#AdditionalInformation" />
+                                        <PropertyValue Property="Label" String="" />    
+                                    </Record>	                                                                        	
+								</Collection>
+							</PropertyValue>
+						</Record> 						
+                        <Record Type="UI.CollectionFacet">							
+                            <PropertyValue Property="ID" String="Repair"/>						
+                            <PropertyValue Property="Label" String="{@i18n>maintenanceInformation}"/>						
+                            <PropertyValue Property="Facets">						
+                                <Collection>					
+                                    <Record Type="UI.CollectionFacet">				
+                                        <PropertyValue Property="Label" String="{@i18n>schedulemaintenance}"/>			
+                                        <PropertyValue Property="ID" String="Repairinfor"/>			
+                                        <PropertyValue Property="Facets">			
+                                            <Collection>		
+                                                <Record Type="UI.ReferenceFacet">
+													<PropertyValue Property="Target"
+														AnnotationPath="@UI.FieldGroup#MT1" />
+													<PropertyValue Property="Label" String="" />
+												</Record>
+												<Record Type="UI.ReferenceFacet">
+													<PropertyValue Property="Target"
+														AnnotationPath="@UI.FieldGroup#MT2" />
+													<PropertyValue Property="Label" String="" />
+												</Record>
+												<Record Type="UI.ReferenceFacet">
+													<PropertyValue Property="Target"
+														AnnotationPath="@UI.FieldGroup#MT3" />
+													<PropertyValue Property="Label" String="" />
+												</Record>	                                            
+                                            </Collection>		
+                                        </PropertyValue>			
+                                    </Record>
+                                   <Record Type="UI.CollectionFacet">
+                                        <PropertyValue Property="Label" String="{@i18n>maintenancehistory}" />
+                                        <PropertyValue Property="ID" String="History"/>	
+										<PropertyValue Property="Facets">
+											<Collection>
+												<Record Type="UI.ReferenceFacet">
+													<PropertyValue Property="Target"
+														AnnotationPath="@UI.LineItem#history" />
+													<PropertyValue Property="Label" String="{@i18n>maintenanceHistory}" />
+												</Record>
+											</Collection>
+										</PropertyValue>
+										
+									</Record>                                                                     
+
+                                </Collection>					
+                            </PropertyValue>						
+                        </Record>
+                        <Record Type="UI.CollectionFacet">							
+                            <PropertyValue Property="ID" String="Customer"/>						
+                            <PropertyValue Property="Label" String="{@i18n>customerInformation}"/>						
+                            <PropertyValue Property="Facets">						
+                                <Collection>					
+                                    <Record Type="UI.CollectionFacet">				
+                                        <PropertyValue Property="Label" String="{@i18n>customerInformation}"/>			
+                                        <PropertyValue Property="ID" String="Customerinfor"/>			
+                                        <PropertyValue Property="Facets">			
+                                            <Collection>		
+                                                <Record Type="UI.ReferenceFacet">	
+                                                    <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Customerformation"/>
+                                                </Record>	
+                                            </Collection>		
+                                        </PropertyValue>			
+                                    </Record>				
+                                </Collection>					
+                            </PropertyValue>						
+                        </Record>                     
+                    </Collection>
+                </Annotation>
+                
+                <!-- resource        -->
+                <!-- <Annotation Term="UI.StatusInfo" Qualifier="MT1"> -->
+				<Annotation Term="UI.FieldGroup" Qualifier="MT1">
+					<Record Type="UI.FieldGroupType">
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value" Path="dateFrom" />
+									<PropertyValue Property="Label" String="{@i18n>datetimefrom}" />
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value" Path="dateTo" />
+									<PropertyValue Property="Label" String="{@i18n>datetimeto}" />
+                                </Record>
+                                <Record Type="UI.DataField">
+									<PropertyValue Property="Value" Path="foregin4/countryName" />
+									<PropertyValue Property="Label" String="{@i18n>country}" />
+                                </Record>
+                                <Record Type="UI.DataField">
+									<PropertyValue Property="Value" Path="foregin4/streetNo" />
+									<PropertyValue Property="Label" String="{@i18n>street}" />
+                                </Record>
+                                <Record Type="UI.DataField">
+									<PropertyValue Property="Value" Path="foregin4/postalNo" />
+									<PropertyValue Property="Label" String="{@i18n>postalCode}" />
+                                </Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+                </Annotation>
+                <!-- <Annotation Term="UI.StatusInfo" Qualifier="MT2"> -->
+				<Annotation Term="UI.FieldGroup" Qualifier="MT2">
+					<Record Type="UI.FieldGroupType">
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value" Path="foregin4/repPersonNo" />
+									<PropertyValue Property="Label" String="{@i18n>repairPersonNo}" />
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value" Path="foregin4/repPersonName1">
+									</PropertyValue>
+									<PropertyValue Property="Label" String="{@i18n>repairPersonName}" />
+                                </Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value" Path="foregin4/telepNo">
+									</PropertyValue>
+									<PropertyValue Property="Label" String="{@i18n>telephoneNumber}" />
+                                </Record>
+                                <Record Type="UI.DataField">
+									<PropertyValue Property="Value" Path="foregin4/faxNo">
+									</PropertyValue>
+									<PropertyValue Property="Label" String="{@i18n>faxNumber}" />
+                                </Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value" Path="foregin4/emailAdd">
+									</PropertyValue>
+									<PropertyValue Property="Label" String="{@i18n>e-mail}" />
+								</Record>                                  
+							</Collection>
+						</PropertyValue>
+					</Record>
+
+				</Annotation>
+
+				<!-- <Annotation Term="UI.StatusInfo" Qualifier="MT3"> -->
+				<Annotation Term="UI.FieldGroup" Qualifier="MT3">
+					<Record Type="UI.FieldGroupType">
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value" Path="price" />
+									<PropertyValue Property="Label" String="{@i18n>price}" />
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value" Path="repContent" />
+									<PropertyValue Property="Label" String="{@i18n>repairContent}" />
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="ProductHomepage">									
+                    <Record Type="UI.FieldGroupType">								
+                        <PropertyValue Property="Data">							
+                            <Collection>						
+                                <Record Type="UI.DataFieldWithUrl">					
+                                    <PropertyValue Property="Value" String="{@i18n>productHomepage}"/>	
+                                    <PropertyValue Property="Label" String="{@i18n>productHomepage}"/>
+                                    <PropertyValue Property="Url" Path="foregin2/productInfo"/>		
+                                </Record>
+                            </Collection>						
+                        </PropertyValue>							
+                    </Record>								
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="PartsInformation">									
+                    <Record Type="UI.FieldGroupType">								
+                        <PropertyValue Property="Data">							
+                            <Collection>						
+                                <Record Type="UI.DataFieldWithUrl">					
+                                    <PropertyValue Property="Value" String="{@i18n>partsinfo}"/>	
+                                    <PropertyValue Property="Label" String="{@i18n>partsInformation}"/>	
+                                    <PropertyValue Property="Url" Path="foregin2/partsInfo"/>    	
+                                </Record>                                
+                            </Collection>						
+                        </PropertyValue>							
+                    </Record>								
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="TechnicalInformation">									
+                    <Record Type="UI.FieldGroupType">								
+                        <PropertyValue Property="Data">							
+                            <Collection>						                              
+                                <Record Type="UI.DataFieldWithUrl">					
+                                    <PropertyValue Property="Value" String="{@i18n>operationManual}"/>	
+                                    <PropertyValue Property="Label" String="{@i18n>technicalInformation}"/>	
+                                    <PropertyValue Property="Url" Path="foregin2/technicalInfo"/>    	
+                                </Record>
+                            </Collection>						
+                        </PropertyValue>							
+                    </Record>								
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="AdditionalInformation">									
+                    <Record Type="UI.FieldGroupType">								
+                        <PropertyValue Property="Data">							
+                            <Collection>						                              
+                                <Record Type="UI.DataFieldWithUrl">
+                                    <PropertyValue Property="Value" String="{@i18n>additionalInformation}"/>
+                                    <PropertyValue Property="Label" String="{@i18n>additionalInformation}"/>
+                                    <PropertyValue Property="Url" Path="foregin2/additionalInfo"/>	
+                                </Record>                                
+                            </Collection>						
+                        </PropertyValue>							
+                    </Record>								
+                </Annotation>               
+                <Annotation Term="UI.FieldGroup" Qualifier="Customerformation">									
+                    <Record Type="UI.FieldGroupType">								
+                        <PropertyValue Property="Data">							
+                            <Collection>						
+                                <Record Type="UI.DataField">					
+                                    <PropertyValue Property="Value" Path="foregin3/customerNo"/>	
+                                    <PropertyValue Property="Label" String="{@i18n>customerId}"/>		
+                                </Record>					
+                                <Record Type="UI.DataField">					
+                                    <PropertyValue Property="Value" Path="foregin3/customerName1"/>	
+                                    <PropertyValue Property="Label" String="{@i18n>firstName}"/>			
+                                </Record>					
+                                <Record Type="UI.DataField">					
+                                    <PropertyValue Property="Value" Path="foregin3/customerName2"/>	
+                                    <PropertyValue Property="Label" String="{@i18n>lastName}"/>			
+                                </Record>					
+                                <Record Type="UI.DataField">					
+                                    <PropertyValue Property="Value" Path="foregin3/emailAdd"/>		
+                                    <PropertyValue Property="Label" String="{@i18n>e-mail}"/>	
+                                </Record>					
+                                <Record Type="UI.DataField">					
+                                    <PropertyValue Property="Value" Path="foregin3/streetNo"/>	
+                                    <PropertyValue Property="Label" String="{@i18n>street}"/>			
+                                </Record>	
+                                <Record Type="UI.DataField">					
+                                    <PropertyValue Property="Value" Path="foregin3/cityName"/>	
+                                    <PropertyValue Property="Label" String="{@i18n>city}"/>		
+                                </Record>					
+                                <Record Type="UI.DataField">					
+                                    <PropertyValue Property="Value" Path="foregin3/countryName"/>	
+                                    <PropertyValue Property="Label" String="{@i18n>country}"/>			
+                                </Record>					
+                                <Record Type="UI.DataField">					
+                                    <PropertyValue Property="Value" Path="foregin3/postalNo"/>	
+                                    <PropertyValue Property="Label" String="{@i18n>postalCode}"/>			
+                                </Record>					
+                                <Record Type="UI.DataField">					
+                                    <PropertyValue Property="Value" Path="foregin3/telepNo"/>		
+                                    <PropertyValue Property="Label" String="{@i18n>telephoneNumber}"/>	
+                                </Record>					
+                                <Record Type="UI.DataField">					
+                                    <PropertyValue Property="Value" Path="foregin3/faxNo"/>	
+                                    <PropertyValue Property="Label" String="{@i18n>faxNumber}"/>			
+                                </Record>					
+                            </Collection>						
+                        </PropertyValue>							
+                    </Record>								
+                </Annotation>		               
+            </Annotations>										
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

@@ -1,0 +1,279 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" Version="1.0" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="1.0" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+        <Schema Namespace="ZGBLMTORDER_SRV" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="DraftAdministrativeData">
+                <Key>
+                    <PropertyRef Name="DraftUUID"/>
+                </Key>
+                <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="CreationDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsCreatedByMe" Type="Edm.Boolean"/>
+                <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="InProcessByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsProcessedByMe" Type="Edm.Boolean"/>
+            </EntityType>
+            <EntityType Name="ENTITY001Set">
+                <Key>
+                    <PropertyRef Name="orderNo"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="orderNo" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="statusNo" Type="Edm.String" MaxLength="10"/>
+                <Property Name="productID" Type="Edm.String" MaxLength="16"/>
+                <Property Name="customerNo" Type="Edm.String" MaxLength="12"/>
+                <Property Name="issDate" Type="Edm.DateTime" sap:display-format="Date"/>
+                <Property Name="issTime" Type="Edm.Time"/>
+                <Property Name="issContent" Type="Edm.String" MaxLength="200"/>
+                <Property Name="repPersonNo" Type="Edm.String" MaxLength="12"/>
+                <Property Name="dateFrom" Type="Edm.DateTime" sap:display-format="Date"/>
+                <Property Name="timeFrom" Type="Edm.Time"/>
+                <Property Name="dateTo" Type="Edm.DateTime" sap:display-format="Date"/>
+                <Property Name="timeTo" Type="Edm.Time"/>
+                <Property Name="repContent" Type="Edm.String" MaxLength="200"/>
+                <Property Name="price" Type="Edm.Decimal" Precision="14" Scale="3"/>
+                <Property Name="currKey" Type="Edm.String" MaxLength="5"/>
+                <Property Name="feedBack" Type="Edm.String" MaxLength="1"/>
+                <Property Name="deleteFlag" Type="Edm.Boolean"/>
+                <Property Name="zaction" Type="Edm.Boolean"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="DraftAdministrativeData_DraftUUID" Type="Edm.Guid"/>
+                <NavigationProperty Name="foregin1" Relationship="ZGBLMTORDER_SRV.ENTITY001Set_foregin1" FromRole="ENTITY001Set" ToRole="ENTITY005Set"/>
+                <NavigationProperty Name="foregin2" Relationship="ZGBLMTORDER_SRV.ENTITY001Set_foregin2" FromRole="ENTITY001Set" ToRole="ENTITY002Set"/>
+                <NavigationProperty Name="foregin3" Relationship="ZGBLMTORDER_SRV.ENTITY001Set_foregin3" FromRole="ENTITY001Set" ToRole="ENTITY003Set"/>
+                <NavigationProperty Name="foregin4" Relationship="ZGBLMTORDER_SRV.ENTITY001Set_foregin4" FromRole="ENTITY001Set" ToRole="ENTITY004Set"/>
+                <NavigationProperty Name="DraftAdministrativeData" Relationship="ZGBLMTORDER_SRV.ENTITY001Set_DraftAdministrativeData" FromRole="ENTITY001Set" ToRole="DraftAdministrativeData"/>
+                <NavigationProperty Name="SiblingEntity" Relationship="ZGBLMTORDER_SRV.ENTITY001Set_SiblingEntity" FromRole="ENTITY001Set" ToRole="ENTITY001Set1"/>
+            </EntityType>
+            <EntityType Name="ENTITY002Set">
+                <Key>
+                    <PropertyRef Name="productID"/>
+                    <PropertyRef Name="languageKey"/>
+                </Key>
+                <Property Name="productID" Type="Edm.String" Nullable="false" MaxLength="16"/>
+                <Property Name="languageKey" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="productName" Type="Edm.String" MaxLength="24"/>
+                <Property Name="productCategory" Type="Edm.String" MaxLength="24"/>
+                <Property Name="productInfo" Type="Edm.String" MaxLength="200"/>
+                <Property Name="technicalInfo" Type="Edm.String" MaxLength="200"/>
+                <Property Name="additionalInfo" Type="Edm.String" MaxLength="200"/>
+                <Property Name="imageURL" Type="Edm.String" MaxLength="200"/>
+                <Property Name="partsInfo" Type="Edm.String" MaxLength="200"/>
+            </EntityType>
+            <EntityType Name="ENTITY003Set">
+                <Key>
+                    <PropertyRef Name="customerNo"/>
+                    <PropertyRef Name="languageKey"/>
+                </Key>
+                <Property Name="customerNo" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="languageKey" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="customerName1" Type="Edm.String" MaxLength="35"/>
+                <Property Name="customerName2" Type="Edm.String" MaxLength="35"/>
+                <Property Name="telepNo" Type="Edm.String" MaxLength="16"/>
+                <Property Name="faxNo" Type="Edm.String" MaxLength="31"/>
+                <Property Name="emailAdd" Type="Edm.String" MaxLength="132"/>
+                <Property Name="countryName" Type="Edm.String" MaxLength="15"/>
+                <Property Name="cityName" Type="Edm.String" MaxLength="35"/>
+                <Property Name="streetNo" Type="Edm.String" MaxLength="35"/>
+                <Property Name="postalNo" Type="Edm.String" MaxLength="10"/>
+            </EntityType>
+            <EntityType Name="ENTITY004Set">
+                <Key>
+                    <PropertyRef Name="repPersonNo"/>
+                    <PropertyRef Name="languageKey"/>
+                </Key>
+                <Property Name="repPersonNo" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="languageKey" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="repPersonName1" Type="Edm.String" MaxLength="35"/>
+                <Property Name="repPersonName2" Type="Edm.String" MaxLength="35"/>
+                <Property Name="telepNo" Type="Edm.String" MaxLength="16"/>
+                <Property Name="faxNo" Type="Edm.String" MaxLength="31"/>
+                <Property Name="emailAdd" Type="Edm.String" MaxLength="132"/>
+                <Property Name="countryName" Type="Edm.String" MaxLength="15"/>
+                <Property Name="cityName" Type="Edm.String" MaxLength="35"/>
+                <Property Name="streetNo" Type="Edm.String" MaxLength="35"/>
+                <Property Name="postalNo" Type="Edm.String" MaxLength="10"/>
+            </EntityType>
+            <EntityType Name="ENTITY005Set">
+                <Key>
+                    <PropertyRef Name="orderNo"/>
+                </Key>
+                <Property Name="orderNo" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="itemNo" Type="Edm.String" MaxLength="2"/>
+                <Property Name="userName" Type="Edm.String" MaxLength="12"/>
+                <Property Name="status" Type="Edm.String" MaxLength="10"/>
+                <Property Name="changeDate" Type="Edm.DateTime" sap:display-format="Date"/>
+                <Property Name="changeBy" Type="Edm.Time"/>
+            </EntityType>
+            <Association Name="ENTITY001Set_foregin1">
+                <End Type="ZGBLMTORDER_SRV.ENTITY001Set" Multiplicity="*" Role="ENTITY001Set"/>
+                <End Type="ZGBLMTORDER_SRV.ENTITY005Set" Multiplicity="*" Role="ENTITY005Set"/>
+            </Association>
+            <Association Name="ENTITY001Set_foregin2">
+                <End Type="ZGBLMTORDER_SRV.ENTITY001Set" Multiplicity="*" Role="ENTITY001Set"/>
+                <End Type="ZGBLMTORDER_SRV.ENTITY002Set" Multiplicity="0..1" Role="ENTITY002Set"/>
+                <ReferentialConstraint>
+                    <Principal Role="ENTITY002Set">
+                        <PropertyRef Name="productID"/>
+                    </Principal>
+                    <Dependent Role="ENTITY001Set">
+                        <PropertyRef Name="productID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="ENTITY001Set_foregin3">
+                <End Type="ZGBLMTORDER_SRV.ENTITY001Set" Multiplicity="*" Role="ENTITY001Set"/>
+                <End Type="ZGBLMTORDER_SRV.ENTITY003Set" Multiplicity="0..1" Role="ENTITY003Set"/>
+                <ReferentialConstraint>
+                    <Principal Role="ENTITY003Set">
+                        <PropertyRef Name="customerNo"/>
+                    </Principal>
+                    <Dependent Role="ENTITY001Set">
+                        <PropertyRef Name="customerNo"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="ENTITY001Set_foregin4">
+                <End Type="ZGBLMTORDER_SRV.ENTITY001Set" Multiplicity="*" Role="ENTITY001Set"/>
+                <End Type="ZGBLMTORDER_SRV.ENTITY004Set" Multiplicity="0..1" Role="ENTITY004Set"/>
+                <ReferentialConstraint>
+                    <Principal Role="ENTITY004Set">
+                        <PropertyRef Name="repPersonNo"/>
+                    </Principal>
+                    <Dependent Role="ENTITY001Set">
+                        <PropertyRef Name="repPersonNo"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="ENTITY001Set_DraftAdministrativeData">
+                <End Type="ZGBLMTORDER_SRV.ENTITY001Set" Multiplicity="*" Role="ENTITY001Set"/>
+                <End Type="ZGBLMTORDER_SRV.DraftAdministrativeData" Multiplicity="0..1" Role="DraftAdministrativeData"/>
+                <ReferentialConstraint>
+                    <Principal Role="DraftAdministrativeData">
+                        <PropertyRef Name="DraftUUID"/>
+                    </Principal>
+                    <Dependent Role="ENTITY001Set">
+                        <PropertyRef Name="DraftAdministrativeData_DraftUUID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="ENTITY001Set_SiblingEntity">
+                <End Type="ZGBLMTORDER_SRV.ENTITY001Set" Multiplicity="*" Role="ENTITY001Set"/>
+                <End Type="ZGBLMTORDER_SRV.ENTITY001Set" Multiplicity="0..1" Role="ENTITY001Set1"/>
+            </Association>
+            <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="DraftAdministrativeData" EntityType="ZGBLMTORDER_SRV.DraftAdministrativeData"/>
+                <EntitySet Name="ENTITY001Set" EntityType="ZGBLMTORDER_SRV.ENTITY001Set"/>
+                <EntitySet Name="ENTITY002Set" EntityType="ZGBLMTORDER_SRV.ENTITY002Set"/>
+                <EntitySet Name="ENTITY003Set" EntityType="ZGBLMTORDER_SRV.ENTITY003Set"/>
+                <EntitySet Name="ENTITY004Set" EntityType="ZGBLMTORDER_SRV.ENTITY004Set"/>
+                <EntitySet Name="ENTITY005Set" EntityType="ZGBLMTORDER_SRV.ENTITY005Set"/>
+                <AssociationSet Name="ENTITY001Set_foregin1" Association="ZGBLMTORDER_SRV.ENTITY001Set_foregin1">
+                    <End EntitySet="ENTITY001Set" Role="ENTITY001Set"/>
+                    <End EntitySet="ENTITY005Set" Role="ENTITY005Set"/>
+                </AssociationSet>
+                <AssociationSet Name="ENTITY001Set_foregin2" Association="ZGBLMTORDER_SRV.ENTITY001Set_foregin2">
+                    <End EntitySet="ENTITY001Set" Role="ENTITY001Set"/>
+                    <End EntitySet="ENTITY002Set" Role="ENTITY002Set"/>
+                </AssociationSet>
+                <AssociationSet Name="ENTITY001Set_foregin3" Association="ZGBLMTORDER_SRV.ENTITY001Set_foregin3">
+                    <End EntitySet="ENTITY001Set" Role="ENTITY001Set"/>
+                    <End EntitySet="ENTITY003Set" Role="ENTITY003Set"/>
+                </AssociationSet>
+                <AssociationSet Name="ENTITY001Set_foregin4" Association="ZGBLMTORDER_SRV.ENTITY001Set_foregin4">
+                    <End EntitySet="ENTITY001Set" Role="ENTITY001Set"/>
+                    <End EntitySet="ENTITY004Set" Role="ENTITY004Set"/>
+                </AssociationSet>
+                <AssociationSet Name="ENTITY001Set_DraftAdministrativeData" Association="ZGBLMTORDER_SRV.ENTITY001Set_DraftAdministrativeData">
+                    <End EntitySet="ENTITY001Set" Role="ENTITY001Set"/>
+                    <End EntitySet="DraftAdministrativeData" Role="DraftAdministrativeData"/>
+                </AssociationSet>
+                <AssociationSet Name="ENTITY001Set_SiblingEntity" Association="ZGBLMTORDER_SRV.ENTITY001Set_SiblingEntity">
+                    <End EntitySet="ENTITY001Set" Role="ENTITY001Set"/>
+                    <End EntitySet="ENTITY001Set" Role="ENTITY001Set1"/>
+                </AssociationSet>
+                <FunctionImport Name="ENTITY001Set_draftPrepare" ReturnType="ZGBLMTORDER_SRV.ENTITY001Set" EntitySet="ENTITY001Set" m:HttpMethod="POST" sap:action-for="ZGBLMTORDER_SRV.ENTITY001Set">
+                    <Parameter Name="orderNo" Type="Edm.String" Mode="In" Nullable="false" MaxLength="10"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Mode="In" Nullable="false"/>
+                    <Parameter Name="SideEffectsQualifier" Type="Edm.String" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <FunctionImport Name="ENTITY001Set_draftActivate" ReturnType="ZGBLMTORDER_SRV.ENTITY001Set" EntitySet="ENTITY001Set" m:HttpMethod="POST" sap:action-for="ZGBLMTORDER_SRV.ENTITY001Set">
+                    <Parameter Name="orderNo" Type="Edm.String" Mode="In" Nullable="false" MaxLength="10"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Mode="In" Nullable="false"/>
+                </FunctionImport>
+                <FunctionImport Name="ENTITY001Set_draftEdit" ReturnType="ZGBLMTORDER_SRV.ENTITY001Set" EntitySet="ENTITY001Set" m:HttpMethod="POST" sap:action-for="ZGBLMTORDER_SRV.ENTITY001Set">
+                    <Parameter Name="orderNo" Type="Edm.String" Mode="In" Nullable="false" MaxLength="10"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Mode="In" Nullable="false"/>
+                    <Parameter Name="PreserveChanges" Type="Edm.Boolean" Mode="In" Nullable="true"/>
+                </FunctionImport>
+            </EntityContainer>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZGBLMTORDER_SRV.DraftAdministrativeData">
+                <Annotation xmlns="http://docs.oasis-open.org/odata/ns/edm" Term="Common.Label" String="{i18n>Draft_DraftAdministrativeData}"/>
+                </Annotations>
+                <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZGBLMTORDER_SRV.DraftAdministrativeData/DraftUUID">
+                    <Annotation xmlns="http://docs.oasis-open.org/odata/ns/edm" Term="Common.Label" String="{i18n>Draft_DraftUUID}"/>
+                        <Annotation xmlns="http://docs.oasis-open.org/odata/ns/edm" Term="UI.Hidden" Bool="true"/>
+                    </Annotations>
+                    <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZGBLMTORDER_SRV.DraftAdministrativeData/CreationDateTime">
+                        <Annotation xmlns="http://docs.oasis-open.org/odata/ns/edm" Term="Common.Label" String="{i18n>Draft_CreationDateTime}"/>
+                        </Annotations>
+                        <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZGBLMTORDER_SRV.DraftAdministrativeData/CreatedByUser">
+                            <Annotation xmlns="http://docs.oasis-open.org/odata/ns/edm" Term="Common.Label" String="{i18n>Draft_CreatedByUser}"/>
+                            </Annotations>
+                            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZGBLMTORDER_SRV.DraftAdministrativeData/DraftIsCreatedByMe">
+                                <Annotation xmlns="http://docs.oasis-open.org/odata/ns/edm" Term="Common.Label" String="{i18n>Draft_DraftIsCreatedByMe}"/>
+                                    <Annotation xmlns="http://docs.oasis-open.org/odata/ns/edm" Term="UI.Hidden" Bool="true"/>
+                                </Annotations>
+                                <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZGBLMTORDER_SRV.DraftAdministrativeData/LastChangeDateTime">
+                                    <Annotation xmlns="http://docs.oasis-open.org/odata/ns/edm" Term="Common.Label" String="{i18n>Draft_LastChangeDateTime}"/>
+                                    </Annotations>
+                                    <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZGBLMTORDER_SRV.DraftAdministrativeData/LastChangedByUser">
+                                        <Annotation xmlns="http://docs.oasis-open.org/odata/ns/edm" Term="Common.Label" String="{i18n>Draft_LastChangedByUser}"/>
+                                        </Annotations>
+                                        <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZGBLMTORDER_SRV.DraftAdministrativeData/InProcessByUser">
+                                            <Annotation xmlns="http://docs.oasis-open.org/odata/ns/edm" Term="Common.Label" String="{i18n>Draft_InProcessByUser}"/>
+                                            </Annotations>
+                                            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZGBLMTORDER_SRV.DraftAdministrativeData/DraftIsProcessedByMe">
+                                                <Annotation xmlns="http://docs.oasis-open.org/odata/ns/edm" Term="Common.Label" String="{i18n>Draft_DraftIsProcessedByMe}"/>
+                                                    <Annotation xmlns="http://docs.oasis-open.org/odata/ns/edm" Term="UI.Hidden" Bool="true"/>
+                                                </Annotations>
+                                                <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZGBLMTORDER_SRV.EntityContainer/ENTITY001Set">
+                                                    <Annotation xmlns="http://docs.oasis-open.org/odata/ns/edm" Term="Common.DraftRoot">
+                                                        <Record xmlns="http://docs.oasis-open.org/odata/ns/edm" Type="Common.DraftRootType">
+                                                            <PropertyValue xmlns="http://docs.oasis-open.org/odata/ns/edm" Property="ActivationAction" String="ZGBLMTORDER_SRV.EntityContainer/ENTITY001Set_draftActivate"/>
+                                                            <PropertyValue xmlns="http://docs.oasis-open.org/odata/ns/edm" Property="EditAction" String="ZGBLMTORDER_SRV.EntityContainer/ENTITY001Set_draftEdit"/>
+                                                            <PropertyValue xmlns="http://docs.oasis-open.org/odata/ns/edm" Property="PreparationAction" String="ZGBLMTORDER_SRV.EntityContainer/ENTITY001Set_draftPrepare"/>
+                                                        </Record>
+                                                    </Annotation>
+                                                </Annotations>
+                                                <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZGBLMTORDER_SRV.ENTITY001Set/IsActiveEntity">
+                                                    <Annotation xmlns="http://docs.oasis-open.org/odata/ns/edm" Term="UI.Hidden" Bool="true"/>
+                                                </Annotations>
+                                                <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZGBLMTORDER_SRV.ENTITY001Set/HasActiveEntity">
+                                                    <Annotation xmlns="http://docs.oasis-open.org/odata/ns/edm" Term="UI.Hidden" Bool="true"/>
+                                                </Annotations>
+                                                <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZGBLMTORDER_SRV.ENTITY001Set/HasDraftEntity">
+                                                    <Annotation xmlns="http://docs.oasis-open.org/odata/ns/edm" Term="UI.Hidden" Bool="true"/>
+                                                </Annotations>
+                                                <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZGBLMTORDER_SRV.ENTITY001Set/DraftAdministrativeData">
+                                                    <Annotation xmlns="http://docs.oasis-open.org/odata/ns/edm" Term="UI.Hidden" Bool="true"/>
+                                                </Annotations>
+                                                <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZGBLMTORDER_SRV.ENTITY001Set/DraftAdministrativeData_DraftUUID">
+                                                    <Annotation xmlns="http://docs.oasis-open.org/odata/ns/edm" Term="UI.Hidden" Bool="true"/>
+                                                </Annotations>
+                                            </Schema>
+                                        </edmx:DataServices>
+                                    </edmx:Edmx>

@@ -1,0 +1,75 @@
+_schema-version: "3.2"
+ID: CAP-APP
+version: 0.0.4
+modules:
+- name: CAP-APP-router
+  type: approuter.nodejs
+  path: cf/router
+  requires:
+  - name: CAP-APP-html5-repo-runtime
+  - name: CAP-APP-uaa
+  - name: CAP-APP-destination
+    group: destinations
+    properties:
+      forwardAuthToken: false
+      name: ui5
+      url: https://ui5.sap.com
+  - name: CAP-APP-connectivity
+  parameters:
+    disk-quota: 256M
+    memory: 256M
+    routes:
+    - route: https://CAP-APP-${org}-${space}.${default-domain}
+- name: CAP-APP-deployer
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: CAP-APP-html5-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - orderlist.zip
+      name: orderlist
+      target-path: resources/
+- name: orderlist
+  type: html5
+  path: orderlist
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: CAP-APP-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      tenant-mode: dedicated
+      xsappname: CAP-APP-${org}
+    service: xsuaa
+    service-plan: application
+- name: CAP-APP-html5-repo-runtime
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-runtime
+- name: CAP-APP-destination
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: destination
+    service-plan: lite
+- name: CAP-APP-html5-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-host
+- name: CAP-APP-connectivity
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: connectivity
+    service-plan: lite
